@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Circolandia: sala feste in affitto a Terni con giochi per bambini fino a 14 anni e tavoli per gli invitati. Prenota online la tua festa di compleanno.">
+<meta property="og:title" content="Circolandia – Sala feste per bambini a Terni">
+<meta property="og:description" content="Affitta la sala con giochi e tavoli per la tua festa. Prenota online.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://circolandia.it/">
+<meta name="theme-color" content="#E2312B">
+<link rel="canonical" href="https://circolandia.it/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath d='M20 3 37 20H3z' fill='%23E2312B'/%3E%3Cpath d='M20 3l6 17H14z' fill='%23fff'/%3E%3Crect x='5' y='20' width='30' height='16' rx='2' fill='%23FFC531'/%3E%3Cpath d='M15 36v-9a5 5 0 0 1 10 0v9' fill='%231F5FBF'/%3E%3C/svg%3E">
+<title>Circolandia – Sala feste per bambini a Terni</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Nunito:wght@400;600;800&family=Caveat:wght@700&display=swap">
+<style>
+html{-webkit-text-size-adjust:100%}body{margin:0}img{max-width:100%}[hidden]{display:none!important}html{scroll-behavior:smooth}
+/* Layout: bande a strisce di tendone che si alternano, contenuti centrati in colonna da 1100px; un solo momento forte (hero con giocoliere e coriandoli) */
+:root{
+  --rosso:#E2312B; --rosso-scuro:#A81E1A;
+  --giallo:#FFC531; --blu:#1F5FBF; --blu-notte:#14306B;
+  --verde:#22A06B;
+  --carta:#FFFDF8; --sabbia:#FFF1D6;
+  --inchiostro:#2A1F2D; --tenue:#6E5F6A;
+  --f-display:"Lilita One","Arial Rounded MT Bold",system-ui,sans-serif;
+  --f-body:"Nunito",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mano:"Caveat","Comic Sans MS",cursive;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+body{background:var(--carta);color:var(--inchiostro);font-family:var(--f-body);font-size:17px;line-height:1.6;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--rosso)}
+a{color:inherit}
+.wrap{max-width:1100px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--f-display);font-weight:400;line-height:1.05;text-wrap:balance;margin:0}
+h2{font-size:clamp(2rem,5vw,3.1rem);color:var(--blu-notte)}
+h3{font-size:1.45rem}
+p{margin:0}
+.etichetta{font-family:var(--f-mano);font-size:1.6rem;color:var(--rosso);line-height:1}
+:focus-visible{outline:3px solid var(--blu);outline-offset:3px;border-radius:6px}
+
+/* NAV */
+header.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--rosso);color:#fff;box-shadow:0 3px 0 var(--rosso-scuro)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:10px}
+.logo{display:flex;align-items:center;gap:10px;font-family:var(--f-display);font-size:1.6rem;text-decoration:none;letter-spacing:.5px}
+.logo svg{width:38px;height:38px;flex:none}
+.nav nav{display:flex;gap:4px;flex-wrap:wrap}
+.nav nav a{text-decoration:none;font-weight:800;padding:6px 12px;border-radius:999px;font-size:.95rem}
+.nav nav a:hover{background:rgba(255,255,255,.18)}
+.nav nav a.cta{background:var(--giallo);color:var(--inchiostro)}
+@media (max-width:760px){.nav nav a:not(.cta){display:none}}
+
+/* HERO */
+.hero{position:relative;overflow:hidden;color:#fff;background:
+  repeating-linear-gradient(100deg,var(--rosso) 0 70px,#F04A3F 70px 140px);}
+.hero::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:46px;background:
+  radial-gradient(circle at 30px 0,transparent 29px,var(--carta) 30px) 0 0/60px 46px repeat-x}
+#coriandoli{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.hero .wrap{position:relative;z-index:2;display:grid;grid-template-columns:1.15fr .85fr;gap:24px;align-items:center;padding-block:56px 92px}
+.hero h1{font-size:clamp(3.4rem,11vw,7.2rem);letter-spacing:1px;text-shadow:0 5px 0 var(--rosso-scuro),0 10px 24px rgba(0,0,0,.18)}
+.hero h1 span{display:inline-block;animation:salta 2.6s ease-in-out infinite}
+.hero h1 span:nth-child(odd){color:var(--giallo)}
+@keyframes salta{0%,70%,100%{transform:translateY(0)}80%{transform:translateY(-14px) rotate(-4deg)}90%{transform:translateY(0)}}
+.hero .sotto{font-size:clamp(1.1rem,2.4vw,1.35rem);font-weight:600;max-width:34ch;margin-top:14px}
+.hero .eta{display:inline-flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+.chip{background:rgba(255,255,255,.18);border:2px solid rgba(255,255,255,.55);border-radius:999px;padding:4px 14px;font-weight:800;font-size:.9rem}
+.bottoni{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+.btn{font-family:var(--f-display);font-size:1.25rem;letter-spacing:.5px;border:none;cursor:pointer;text-decoration:none;padding:14px 26px;border-radius:16px;display:inline-flex;align-items:center;gap:8px;transition:transform .15s}
+.btn:hover{transform:translateY(-3px) rotate(-1deg)}
+.btn:active{transform:translateY(1px)}
+.btn-giallo{background:var(--giallo);color:var(--inchiostro);box-shadow:0 5px 0 #C9900F}
+.btn-bianco{background:#fff;color:var(--rosso);box-shadow:0 5px 0 rgba(0,0,0,.18)}
+.btn-blu{background:var(--blu);color:#fff;box-shadow:0 5px 0 var(--blu-notte)}
+.palco{position:relative;aspect-ratio:1;max-width:100%}
+.palco svg{width:100%;height:100%;overflow:visible}
+
+/* SEZIONI */
+section{padding-block:72px}
+.intesta{display:grid;gap:8px;margin-bottom:34px;max-width:640px}
+.intesta p.lead{color:var(--tenue);font-size:1.1rem}
+
+.attrazioni{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.att{background:#fff;border:3px solid var(--inchiostro);border-radius:22px;padding:22px 20px 24px;display:grid;gap:10px;align-content:start;box-shadow:6px 6px 0 var(--c);transition:transform .2s, box-shadow .2s}
+.att:hover{transform:translate(-3px,-3px) rotate(-.6deg);box-shadow:10px 10px 0 var(--c)}
+.att .ico{width:64px;height:64px;border-radius:18px;background:var(--c);display:grid;place-items:center}
+.att .ico svg{width:38px;height:38px}
+.att .per{font-weight:800;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--tenue)}
+.att p{font-size:.98rem}
+
+.genitori{background:var(--blu-notte);color:#fff;position:relative;overflow:hidden}
+.genitori h2{color:var(--giallo)}
+.genitori .lead{color:#C9D6F2}
+.genitori .etichetta{color:var(--giallo)}
+.lista-gen{display:grid;grid-template-columns:repeat(4,1fr);gap:28px 28px}
+.lista-gen div{display:grid;grid-template-columns:44px 1fr;gap:12px;align-items:start}
+.lista-gen .pallino{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--giallo);color:var(--blu-notte);font-family:var(--f-display);font-size:1.3rem}
+.lista-gen strong{display:block;font-size:1.08rem}
+.lista-gen span{color:#C9D6F2;font-size:.96rem}
+
+.prezzi{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.biglietto{position:relative;background:var(--sabbia);border-radius:18px;padding:26px 24px;display:grid;gap:6px;align-content:start;
+  -webkit-mask:radial-gradient(circle 14px at 0 50%,#0000 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 14px at 100% 50%,#0000 98%,#000) right/51% 100% no-repeat;
+          mask:radial-gradient(circle 14px at 0 50%,#0000 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 14px at 100% 50%,#0000 98%,#000) right/51% 100% no-repeat}
+.biglietto .tipo{font-weight:800;text-transform:uppercase;letter-spacing:.08em;font-size:.8rem;color:var(--rosso)}
+.biglietto .cifra{font-family:var(--f-display);font-size:2.6rem;color:var(--blu-notte);font-variant-numeric:tabular-nums}
+.biglietto .cifra small{font-size:1rem;font-family:var(--f-body);font-weight:800;color:var(--tenue)}
+.biglietto ul{margin:6px 0 0;padding-left:18px;font-size:.95rem}
+.biglietto.top{background:var(--giallo)}
+.nota{margin-top:16px;color:var(--tenue);font-size:.9rem}
+
+.faq{display:grid;gap:12px;max-width:780px}
+.faq details{background:#fff;border:3px solid var(--inchiostro);border-radius:18px;padding:4px 20px;box-shadow:4px 4px 0 var(--giallo)}
+.faq summary{cursor:pointer;font-weight:800;font-size:1.08rem;padding:12px 0;list-style:none;display:flex;justify-content:space-between;gap:12px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-family:var(--f-display);font-size:1.6rem;line-height:1;color:var(--rosso);transition:transform .2s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{padding-bottom:14px;color:var(--tenue)}
+.eventi{display:grid;gap:14px}
+.evento{display:grid;grid-template-columns:86px 1fr auto;gap:18px;align-items:center;border-bottom:2px dashed #E6D7BF;padding-bottom:14px}
+.data{background:var(--rosso);color:#fff;border-radius:14px;text-align:center;padding:8px 4px;font-family:var(--f-display);line-height:1}
+.data b{display:block;font-size:2rem;font-weight:400}
+.data i{font-style:normal;font-size:.85rem;letter-spacing:.08em}
+.evento h3{font-size:1.25rem;color:var(--blu-notte)}
+.evento p{color:var(--tenue);font-size:.95rem}
+.evento .badge{font-weight:800;font-size:.8rem;border-radius:999px;padding:4px 12px;background:#E3F4EC;color:#146B47;white-space:nowrap}
+
+/* PRENOTA */
+.prenota{background:var(--sabbia);position:relative}
+.prenota-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:36px;align-items:start}
+.passi{display:grid;gap:16px;margin-top:22px;counter-reset:p}
+.passi div{display:grid;grid-template-columns:40px 1fr;gap:12px;align-items:start}
+.passi div::before{counter-increment:p;content:counter(p);width:40px;height:40px;border-radius:50%;background:var(--blu);color:#fff;display:grid;place-items:center;font-family:var(--f-display);font-size:1.2rem}
+form{background:#fff;border:3px solid var(--inchiostro);border-radius:24px;padding:26px;box-shadow:8px 8px 0 var(--rosso);display:grid;gap:16px;min-width:0}
+.tipi{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;border:none;padding:0;margin:0}
+.tipi legend{font-weight:800;margin-bottom:8px;padding:0}
+.tipi input{position:absolute;opacity:0;pointer-events:none}
+.tipi label{border:2px solid #E3D4BD;border-radius:16px;padding:12px 10px;text-align:center;cursor:pointer;font-weight:800;font-size:.95rem;display:grid;gap:4px;transition:all .15s}
+.tipi label span{font-size:1.8rem;line-height:1}
+.tipi input:checked + label{border-color:var(--rosso);background:#FFECEA;transform:translateY(-2px)}
+.tipi input:focus-visible + label{outline:3px solid var(--blu);outline-offset:2px}
+.riga{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.campo{display:grid;gap:5px;min-width:0}
+.campo label{font-weight:800;font-size:.92rem}
+.campo input,.campo select,.campo textarea{font:inherit;font-size:1rem;padding:11px 13px;border:2px solid #E3D4BD;border-radius:12px;background:var(--carta);color:var(--inchiostro);width:100%}
+.campo input:focus,.campo select:focus,.campo textarea:focus{border-color:var(--blu);outline:none;box-shadow:0 0 0 3px rgba(31,95,191,.18)}
+.campo .err{color:var(--rosso-scuro);font-size:.85rem;font-weight:700;min-height:0}
+.campo.ko input,.campo.ko select{border-color:var(--rosso)}
+.festa-extra{display:grid;gap:14px}
+.check{display:grid;grid-template-columns:22px 1fr;gap:10px;font-size:.9rem;align-items:start}
+.check input{width:20px;height:20px;margin-top:2px;accent-color:var(--rosso)}
+.esito{text-align:center;display:grid;gap:12px;justify-items:center;padding:20px 6px}
+.esito .codice{font-family:var(--f-display);font-size:2rem;color:var(--blu);letter-spacing:2px;background:var(--sabbia);padding:6px 18px;border-radius:12px}
+.riepilogo{text-align:left;width:100%;background:var(--carta);border-radius:14px;padding:14px 16px;font-size:.95rem;display:grid;gap:4px}
+.riepilogo b{display:inline-block;min-width:120px}
+
+/* SOCIAL */
+.social{background:
+  repeating-linear-gradient(100deg,var(--blu) 0 70px,#2A6ED0 70px 140px);color:#fff;text-align:center}
+.social h2{color:#fff}
+.social .lead{color:#DCE7FA}
+.social .etichetta{color:var(--giallo)}
+.social .intesta{margin-inline:auto;justify-items:center}
+.icone{display:flex;justify-content:center;gap:18px;flex-wrap:wrap}
+.soc{display:grid;justify-items:center;gap:8px;text-decoration:none;font-weight:800}
+.soc .tondo{width:84px;height:84px;border-radius:50%;background:#fff;display:grid;place-items:center;box-shadow:0 6px 0 rgba(0,0,0,.2);transition:transform .2s}
+.soc:hover .tondo{transform:translateY(-6px) rotate(8deg)}
+.soc svg{width:42px;height:42px}
+.soc small{font-weight:600;opacity:.8}
+
+footer{background:var(--inchiostro);color:#E9DFE6;font-size:.95rem}
+footer .wrap{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:28px;padding-block:44px}
+footer h3{color:var(--giallo);font-size:1.2rem;margin-bottom:8px}
+footer .da{background:rgba(255,197,49,.15);color:var(--giallo);border-radius:6px;padding:0 6px;font-size:.8rem;font-weight:800}
+.copy{border-top:1px solid #4A3E4C;text-align:center;padding-block:14px;font-size:.85rem;color:#A99BA6}
+
+/* palloncini */
+.palloncino{position:absolute;bottom:-120px;width:46px;height:58px;border-radius:50% 50% 48% 48%;opacity:.9;animation:vola linear infinite;z-index:1}
+.palloncino::after{content:"";position:absolute;left:50%;top:100%;width:1px;height:50px;background:rgba(255,255,255,.5)}
+@keyframes vola{to{transform:translateY(-130vh) translateX(30px)}}
+
+@media (max-width:900px){
+  .hero .wrap{grid-template-columns:1fr;padding-block:40px 84px}
+  .palco{max-width:300px;margin:0 auto;order:-1}
+  .attrazioni{grid-template-columns:1fr 1fr}
+  .lista-gen{grid-template-columns:1fr 1fr}
+  .prezzi{grid-template-columns:1fr}
+  .prenota-grid{grid-template-columns:1fr}
+  footer .wrap{grid-template-columns:1fr}
+}
+@media (max-width:560px){
+  .attrazioni,.lista-gen{grid-template-columns:1fr}
+  .riga{grid-template-columns:1fr}
+  .tipi{grid-template-columns:1fr}
+  .tipi label{grid-template-columns:auto 1fr;text-align:left;align-items:center}
+  .evento{grid-template-columns:70px 1fr}
+  .evento .badge{grid-column:2;justify-self:start}
+  form{padding:20px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="Circolandia, torna all'inizio">
+      <svg viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 L37 20 H3 Z" fill="#FFC531"/><path d="M20 3 L26 20 H14 Z" fill="#fff"/><rect x="5" y="20" width="30" height="16" rx="2" fill="#fff"/><path d="M15 36 V27 a5 5 0 0 1 10 0 V36" fill="#1F5FBF"/><circle cx="20" cy="3" r="2.5" fill="#FFC531"/></svg>
+      Circolandia
+    </a>
+    <nav aria-label="Menu principale">
+      <a href="#attrazioni">La sala</a>
+      <a href="#genitori">Come funziona</a>
+      <a href="#prezzi">Prezzi</a>
+      <a href="#eventi">Domande</a>
+      <a class="cta" href="#prenota">Prenota</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+<section class="hero" style="padding-block:0">
+  <canvas id="coriandoli" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div>
+      <p class="etichetta" style="color:var(--giallo)">La tua festa, il nostro tendone</p>
+      <h1 aria-label="Circolandia"><span>C</span><span style="animation-delay:.1s">i</span><span style="animation-delay:.2s">r</span><span style="animation-delay:.3s">c</span><span style="animation-delay:.4s">o</span><span style="animation-delay:.5s">l</span><span style="animation-delay:.6s">a</span><span style="animation-delay:.7s">n</span><span style="animation-delay:.8s">d</span><span style="animation-delay:.9s">i</span><span style="animation-delay:1s">a</span></h1>
+      <p class="sotto">La sala feste da affittare a Terni, con giochi per bambini fino a 14 anni e tavoli per tutti. Voi portate torta e invitati, la sala è solo vostra.</p>
+      <div class="eta" aria-label="Occasioni">
+        <span class="chip">Compleanni</span><span class="chip">Feste di classe</span><span class="chip">Ricorrenze in famiglia</span>
+      </div>
+      <div class="bottoni">
+        <a class="btn btn-giallo" href="#prenota">Prenota la sala</a>
+        <a class="btn btn-bianco" href="#attrazioni">Guarda cosa c'è dentro</a>
+      </div>
+    </div>
+    <div class="palco" aria-hidden="true">
+      <svg viewBox="0 0 300 300">
+        <defs>
+          <style>
+            .pall{animation:giro 2.4s linear infinite;transform-origin:150px 150px}
+            @keyframes giro{to{transform:rotate(360deg)}}
+            .corpo{animation:dondola 1.2s ease-in-out infinite alternate;transform-origin:150px 270px}
+            @keyframes dondola{from{transform:rotate(-3deg)}to{transform:rotate(3deg)}}
+          </style>
+        </defs>
+        <ellipse cx="150" cy="282" rx="95" ry="14" fill="rgba(0,0,0,.18)"/>
+        <!-- pedana -->
+        <rect x="80" y="252" width="140" height="26" rx="8" fill="#FFC531"/>
+        <rect x="80" y="252" width="140" height="8" rx="4" fill="#FFE08A"/>
+        <g class="corpo">
+          <!-- gambe -->
+          <rect x="132" y="200" width="14" height="54" rx="6" fill="#14306B"/>
+          <rect x="154" y="200" width="14" height="54" rx="6" fill="#14306B"/>
+          <!-- busto -->
+          <path d="M118 210 Q150 120 182 210 Z" fill="#1F5FBF"/>
+          <circle cx="150" cy="170" r="5" fill="#FFC531"/><circle cx="150" cy="188" r="5" fill="#FFC531"/>
+          <!-- braccia -->
+          <path d="M126 178 Q100 160 108 132" stroke="#1F5FBF" stroke-width="12" stroke-linecap="round" fill="none"/>
+          <path d="M174 178 Q200 160 192 132" stroke="#1F5FBF" stroke-width="12" stroke-linecap="round" fill="none"/>
+          <circle cx="108" cy="130" r="9" fill="#fff"/><circle cx="192" cy="130" r="9" fill="#fff"/>
+          <!-- testa -->
+          <circle cx="150" cy="118" r="26" fill="#FFD9B8"/>
+          <circle cx="150" cy="122" r="7" fill="#E2312B"/>
+          <circle cx="141" cy="112" r="3" fill="#2A1F2D"/><circle cx="159" cy="112" r="3" fill="#2A1F2D"/>
+          <path d="M139 131 Q150 140 161 131" stroke="#2A1F2D" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <!-- cappello -->
+          <path d="M128 98 L150 58 L172 98 Z" fill="#E2312B"/>
+          <circle cx="150" cy="56" r="7" fill="#FFC531"/>
+          <circle cx="124" cy="116" r="9" fill="#FF8FA3"/><circle cx="176" cy="116" r="9" fill="#FF8FA3"/>
+        </g>
+        <!-- palline in orbita -->
+        <g class="pall"><circle cx="150" cy="38" r="14" fill="#FFC531" stroke="#fff" stroke-width="3"/></g>
+        <g class="pall" style="animation-delay:-.8s"><circle cx="150" cy="38" r="14" fill="#22A06B" stroke="#fff" stroke-width="3"/></g>
+        <g class="pall" style="animation-delay:-1.6s"><circle cx="150" cy="38" r="14" fill="#1F5FBF" stroke="#fff" stroke-width="3"/></g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section id="attrazioni">
+  <div class="wrap">
+    <div class="intesta">
+      <span class="etichetta">Sotto il tendone</span>
+      <h2>Una sala tutta per la vostra festa</h2>
+      <p class="lead">Dentro trovate tutto quello che serve per far giocare i bambini e far sedere gli invitati. L'organizzazione della festa è vostra.</p>
+    </div>
+    <div class="attrazioni">
+      <article class="att" style="--c:var(--rosso)">
+        <div class="ico"><svg viewBox="0 0 40 40" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="13" cy="14" r="6"/><circle cx="27" cy="14" r="6"/><circle cx="20" cy="27" r="6"/></svg></div>
+        <span class="per">Fino a 14 anni</span>
+        <h3>Area giochi</h3>
+        <p>Giochi per far divertire i bambini per tutta la durata della festa, senza bisogno di portare niente da casa.</p>
+      </article>
+      <article class="att" style="--c:var(--giallo)">
+        <div class="ico"><svg viewBox="0 0 40 40" fill="none" stroke="#2A1F2D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 16h30"/><path d="M9 16v16M31 16v16"/><path d="M14 22h12"/></svg></div>
+        <span class="per">Bambini e adulti</span>
+        <h3>Tavoli e sedie</h3>
+        <p>Tavoli per la merenda dei bambini e posti a sedere per i genitori, da disporre come preferite.</p>
+      </article>
+      <article class="att" style="--c:var(--blu)">
+        <div class="ico"><svg viewBox="0 0 40 40" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="18" width="26" height="16" rx="3"/><path d="M7 25h26"/><path d="M13 18v-4M20 18v-6M27 18v-4"/></svg></div>
+        <span class="per">Fai da te</span>
+        <h3>Torta e buffet</h3>
+        <p>Portate cibo, bibite, torta e decorazioni. Il tavolo del buffet lo allestite voi, come piace a voi.</p>
+      </article>
+      <article class="att" style="--c:var(--verde)">
+        <div class="ico"><svg viewBox="0 0 40 40" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="14" cy="20" r="7"/><path d="M21 20h14M30 20v5M35 20v4"/></svg></div>
+        <span class="per">Solo vostra</span>
+        <h3>Sala in esclusiva</h3>
+        <p>Per tutta la fascia prenotata la sala è riservata ai vostri invitati. Nessun estraneo, nessuna fretta.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="genitori" id="genitori">
+  <div class="wrap">
+    <div class="intesta">
+      <span class="etichetta">Per mamma e papà</span>
+      <h2>Come funziona l'affitto</h2>
+      <p class="lead">Quattro passaggi, dalla prenotazione alla riconsegna delle chiavi.</p>
+    </div>
+    <div class="lista-gen">
+      <div><span class="pallino">1</span><p><strong>Scegli data e fascia</strong><span>Compila il modulo qui sotto con giorno, orario e numero di invitati.</span></p></div>
+      <div><span class="pallino">2</span><p><strong>Ricevi la conferma</strong><span>Controlliamo che la sala sia libera e ti confermiamo su WhatsApp o email.</span></p></div>
+      <div><span class="pallino">3</span><p><strong>Allestisci e festeggia</strong><span>Arrivi con torta, cibo e decorazioni. I bambini giocano, voi vi godete la festa.</span></p></div>
+      <div><span class="pallino">4</span><p><strong>Riconsegna la sala</strong><span>A fine festa lasci la sala in ordine, pronta per la festa successiva.</span></p></div>
+    </div>
+  </div>
+</section>
+
+<section id="prezzi">
+  <div class="wrap">
+    <div class="intesta">
+      <span class="etichetta">Biglietteria</span>
+      <h2>Prezzi chiari, niente sorprese</h2>
+    </div>
+    <div class="prezzi">
+      <div class="biglietto">
+        <span class="tipo">Feriale</span>
+        <span class="cifra">120 € <small>/ fascia</small></span>
+        <ul><li>Dal martedì al venerdì</li><li>Sala in esclusiva per 3 ore</li><li>Giochi, tavoli e sedie inclusi</li></ul>
+      </div>
+      <div class="biglietto top">
+        <span class="tipo">Weekend e festivi</span>
+        <span class="cifra">160 € <small>/ fascia</small></span>
+        <ul><li>Sabato, domenica e festivi</li><li>Sala in esclusiva per 3 ore</li><li>30 minuti extra per allestire</li></ul>
+      </div>
+      <div class="biglietto">
+        <span class="tipo">Ora in più</span>
+        <span class="cifra">40 € <small>/ ora</small></span>
+        <ul><li>Da aggiungere a una fascia</li><li>Se la sala è libera dopo di voi</li><li>Da chiedere nel modulo</li></ul>
+      </div>
+    </div>
+    <p class="nota">Prezzi di esempio, da sostituire con il listino definitivo.</p>
+  </div>
+</section>
+
+<section id="eventi" style="padding-top:0">
+  <div class="wrap">
+    <div class="intesta">
+      <span class="etichetta">Prima di prenotare</span>
+      <h2>Domande frequenti</h2>
+    </div>
+    <div class="faq">
+      <details open><summary>Possiamo portare cibo, bibite e torta?</summary><p>Sì. La sala si affitta libera: il buffet, la torta e le decorazioni li portate voi.</p></details>
+      <details><summary>C'è un animatore?</summary><p>No, affittiamo solo la sala con giochi e tavoli. Se volete un animatore o un mago potete portarlo voi.</p></details>
+      <details><summary>Quante persone può ospitare la sala?</summary><p>Fino a ___ persone tra bambini e adulti. Indicate il numero di invitati nel modulo, così verifichiamo che ci stiate comodi.</p></details>
+      <details><summary>Quando posso entrare per allestire?</summary><p>Nei weekend sono inclusi 30 minuti prima dell'inizio della fascia. Nei giorni feriali chiedete nel modulo e vi diciamo se è possibile.</p></details>
+      <details><summary>Serve una caparra?</summary><p>Dopo la conferma vi chiediamo una caparra per bloccare la data. Importo e modalità ve li comunichiamo insieme alla conferma.</p></details>
+    </div>
+    <p class="nota">Risposte di esempio, da confermare.</p>
+  </div>
+</section>
+
+<section class="prenota" id="prenota">
+  <div class="wrap prenota-grid">
+    <div>
+      <div class="intesta" style="margin-bottom:0">
+        <span class="etichetta">Biglietti, prego!</span>
+        <h2>Prenota la sala</h2>
+        <p class="lead">Compila il modulo: ti rispondiamo entro poche ore per confermare.</p>
+      </div>
+      <div class="passi">
+        <div><p><strong>Scegli giorno e fascia</strong><br>Indica l'occasione e quanti invitati aspetti.</p></div>
+        <div><p><strong>Ricevi il codice</strong><br>Ti diamo subito un codice di richiesta da conservare.</p></div>
+        <div><p><strong>Ti confermiamo</strong><br>Controlliamo che la sala sia libera e ti scriviamo su WhatsApp o email.</p></div>
+      </div>
+    </div>
+
+    <form id="modulo" novalidate>
+      <div id="campi" style="display:grid;gap:16px">
+        <fieldset class="tipi">
+          <legend>Che festa organizzi?</legend>
+          <input type="radio" name="tipo" id="t-festa" value="Compleanno" checked><label for="t-festa"><span aria-hidden="true">🎂</span>Compleanno</label>
+          <input type="radio" name="tipo" id="t-classe" value="Festa di classe"><label for="t-classe"><span aria-hidden="true">🎈</span>Festa di classe</label>
+          <input type="radio" name="tipo" id="t-altro" value="Altra occasione"><label for="t-altro"><span aria-hidden="true">🎉</span>Altra occasione</label>
+        </fieldset>
+
+        <div class="riga">
+          <div class="campo"><label for="data">Data</label><input type="date" id="data" name="data" required><span class="err" id="e-data"></span></div>
+          <div class="campo"><label for="fascia">Fascia oraria</label>
+            <select id="fascia" name="fascia" required>
+              <option value="">Scegli…</option>
+              <option>Mattina 9:30–12:30</option>
+              <option>Pomeriggio 15:00–18:00</option>
+              <option>Sera 18:30–21:30</option>
+            </select><span class="err" id="e-fascia"></span></div>
+        </div>
+
+        <div class="riga">
+          <div class="campo"><label for="bambini">Bambini invitati</label><input type="number" id="bambini" name="bambini" min="1" max="80" value="15" required><span class="err" id="e-bambini"></span></div>
+          <div class="campo"><label for="adulti">Adulti invitati</label><input type="number" id="adulti" name="adulti" min="0" max="80" value="10"></div>
+        </div>
+
+        <div class="festa-extra" id="festaExtra">
+          <div class="riga">
+            <div class="campo"><label for="festeggiato">Nome del festeggiato</label><input type="text" id="festeggiato" name="festeggiato"></div>
+            <div class="campo"><label for="anni">Anni che compie</label><input type="number" id="anni" name="anni" min="1" max="99"></div>
+          </div>
+        </div>
+
+        <label class="check"><input type="checkbox" id="extra" name="extra"><span>Vorrei un'ora in più dopo la fascia, se la sala è libera.</span></label>
+
+        <div class="riga">
+          <div class="campo"><label for="nome">Nome e cognome del genitore</label><input type="text" id="nome" name="nome" autocomplete="name" required><span class="err" id="e-nome"></span></div>
+          <div class="campo"><label for="tel">Cellulare (WhatsApp)</label><input type="tel" id="tel" name="tel" autocomplete="tel" placeholder="333 123 4567" required><span class="err" id="e-tel"></span></div>
+        </div>
+        <div class="campo"><label for="email">Email</label><input type="email" id="email" name="email" autocomplete="email" required><span class="err" id="e-email"></span></div>
+        <div class="campo"><label for="note">Note (allestimento, richieste…)</label><textarea id="note" name="note" rows="3"></textarea></div>
+
+        <label class="check"><input type="checkbox" id="privacy" name="privacy" required><span>Ho letto l'informativa privacy e acconsento al trattamento dei dati per gestire la prenotazione.</span></label>
+        <span class="err" id="e-privacy" style="color:var(--rosso-scuro);font-weight:700;font-size:.85rem"></span>
+
+        <button type="submit" class="btn btn-blu" style="justify-content:center">Invia la richiesta</button>
+      </div>
+
+      <div class="esito" id="esito" hidden aria-live="polite">
+        <span class="etichetta">Evviva!</span>
+        <h3 style="font-size:1.8rem;color:var(--blu-notte)">Richiesta ricevuta</h3>
+        <p>Il tuo codice di richiesta è</p>
+        <span class="codice" id="codice">CRL-0000</span>
+        <div class="riepilogo" id="riepilogo"></div>
+        <p style="color:var(--tenue);font-size:.95rem">Ti scriveremo su WhatsApp o email per confermare. La prenotazione è valida solo dopo la nostra conferma.</p>
+        <button type="button" class="btn btn-giallo" id="nuova">Nuova prenotazione</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<section class="social" id="social">
+  <div class="wrap">
+    <div class="intesta">
+      <span class="etichetta">Restiamo in contatto</span>
+      <h2>Seguici dietro le quinte</h2>
+      <p class="lead">Foto delle feste, nuovi laboratori e promo riservate a chi ci segue.</p>
+    </div>
+    <div class="icone">
+      <a class="soc" href="https://www.facebook.com/circolandia" target="_blank" rel="noopener">
+        <span class="tondo"><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" fill="#1F5FBF"/><path d="M22 33V21h4l.6-4.5H22v-2.8c0-1.3.4-2.2 2.2-2.2h2.5v-4c-.4-.1-1.9-.2-3.6-.2-3.6 0-6 2.2-6 6.2v3H13V21h4.1v12z" fill="#fff"/></svg></span>
+        Facebook <small>@circolandia</small>
+      </a>
+      <a class="soc" href="https://www.instagram.com/circolandia" target="_blank" rel="noopener">
+        <span class="tondo"><svg viewBox="0 0 40 40" fill="none" stroke="#E2312B" stroke-width="3.2"><rect x="7" y="7" width="26" height="26" rx="8"/><circle cx="20" cy="20" r="6"/><circle cx="28" cy="12" r="1.2" fill="#E2312B"/></svg></span>
+        Instagram <small>@circolandia</small>
+      </a>
+      <a class="soc" href="#social" aria-disabled="true">
+        <span class="tondo"><svg viewBox="0 0 40 40"><path d="M23 7h4.5c.4 3 2.5 5.4 5.5 5.7v4.6c-2 0-3.9-.6-5.5-1.7V25a8 8 0 1 1-8-8c.5 0 1 0 1.5.1v4.7a3.5 3.5 0 1 0 2 3.2z" fill="#2A1F2D"/></svg></span>
+        TikTok <small>in arrivo</small>
+      </a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <h3>Circolandia</h3>
+      <p>Sala feste in affitto con giochi per bambini fino a 14 anni e tavoli per gli invitati, a Terni.</p>
+      <p style="margin-top:10px">Via ______, Terni (TR) <span class="da">da completare</span></p>
+    </div>
+    <div>
+      <h3>Fasce di affitto</h3>
+      <p>Mattina 9:30–12:30<br>Pomeriggio 15:00–18:00<br>Sera 18:30–21:30</p>
+      <p style="margin-top:6px"><span class="da">da confermare</span></p>
+    </div>
+    <div>
+      <h3>Contatti</h3>
+      <p>Tel/WhatsApp: 3__ ___ ____<br>info@circolandia.it</p>
+      <p style="margin-top:6px"><span class="da">da completare</span></p>
+    </div>
+  </div>
+  <div class="copy">© 2026 Circolandia · P.IVA ___________ · Privacy e cookie</div>
+</footer>
+
+<script>
+(function(){
+  // ====== CONFIGURAZIONE (da compilare quando il sito va online) ======
+  // FORM_ENDPOINT: indirizzo del servizio che inoltra le richieste via email (es. Formspree, Getform).
+  // Se resta vuoto, la richiesta viene solo mostrata a schermo (modalità anteprima).
+  var FORM_ENDPOINT = "";
+  // ====================================================================
+
+  var ridotto = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // --- Coriandoli ---
+  var cv = document.getElementById('coriandoli'), ctx = cv.getContext('2d'), pezzi = [];
+  var colori = ['#FFC531','#ffffff','#1F5FBF','#22A06B','#FF8FA3'];
+  function dimensiona(){ var r = cv.getBoundingClientRect(); cv.width = r.width*devicePixelRatio; cv.height = r.height*devicePixelRatio; }
+  function nuovo(x,y,esplosione){
+    return {x:x, y:y, vx:(Math.random()-.5)*(esplosione?14:1.2), vy:esplosione?-Math.random()*12-4:Math.random()*1.5+.6,
+      r:Math.random()*5+4, a:Math.random()*6.28, va:(Math.random()-.5)*.25, c:colori[(Math.random()*colori.length)|0], vita:esplosione?160:Infinity};
+  }
+  function semina(){ pezzi = []; var n = Math.min(70, (cv.width/devicePixelRatio)/14); for(var i=0;i<n;i++){ pezzi.push(nuovo(Math.random()*cv.width, Math.random()*cv.height, false)); } }
+  function disegna(){
+    ctx.clearRect(0,0,cv.width,cv.height);
+    for(var i=pezzi.length-1;i>=0;i--){
+      var p = pezzi[i];
+      p.x += p.vx*devicePixelRatio; p.y += p.vy*devicePixelRatio; p.a += p.va;
+      if(p.vita!==Infinity){ p.vy += .35; p.vx *= .98; p.vita--; if(p.vita<=0){ pezzi.splice(i,1); continue; } }
+      else if(p.y > cv.height+20){ p.y = -20; p.x = Math.random()*cv.width; }
+      ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.a); ctx.fillStyle = p.c;
+      ctx.fillRect(-p.r*devicePixelRatio/2, -p.r*devicePixelRatio/4, p.r*devicePixelRatio, p.r*devicePixelRatio/2);
+      ctx.restore();
+    }
+    requestAnimationFrame(disegna);
+  }
+  dimensiona(); semina();
+  if(!ridotto){ requestAnimationFrame(disegna); }
+  window.addEventListener('resize', function(){ dimensiona(); semina(); });
+
+  function scoppio(el){
+    if(ridotto) return;
+    var r = cv.getBoundingClientRect(), b = el.getBoundingClientRect();
+    var x = (b.left + b.width/2 - r.left)*devicePixelRatio, y = (b.top - r.top)*devicePixelRatio;
+    if(y < 0 || y > cv.height) { burstFisso(b); return; }
+    for(var i=0;i<60;i++) pezzi.push(nuovo(x,y,true));
+  }
+
+  // coriandoli a schermo intero (per il form)
+  var fx = document.createElement('canvas');
+  fx.style.cssText = 'position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:70';
+  fx.setAttribute('aria-hidden','true'); document.body.appendChild(fx);
+  var fctx = fx.getContext('2d'), fp = [], attivo = false;
+  function burstFisso(b){
+    if(ridotto) return;
+    fx.width = innerWidth*devicePixelRatio; fx.height = innerHeight*devicePixelRatio;
+    var x = (b.left+b.width/2)*devicePixelRatio, y = (b.top+b.height/2)*devicePixelRatio;
+    for(var i=0;i<120;i++) fp.push(nuovo(x,y,true));
+    if(!attivo){ attivo = true; requestAnimationFrame(animaFisso); }
+  }
+  function animaFisso(){
+    fctx.clearRect(0,0,fx.width,fx.height);
+    for(var i=fp.length-1;i>=0;i--){
+      var p = fp[i]; p.x += p.vx*devicePixelRatio; p.y += p.vy*devicePixelRatio; p.vy += .3; p.vx *= .985; p.a += p.va; p.vita--;
+      if(p.vita<=0){ fp.splice(i,1); continue; }
+      fctx.save(); fctx.translate(p.x,p.y); fctx.rotate(p.a); fctx.fillStyle = p.c;
+      fctx.fillRect(-p.r*devicePixelRatio/2,-p.r*devicePixelRatio/4,p.r*devicePixelRatio,p.r*devicePixelRatio/2); fctx.restore();
+    }
+    if(fp.length){ requestAnimationFrame(animaFisso); } else { attivo = false; fctx.clearRect(0,0,fx.width,fx.height); }
+  }
+
+  document.querySelectorAll('.btn').forEach(function(b){
+    b.addEventListener('click', function(){ scoppio(b); });
+  });
+
+  // --- Palloncini nell'area genitori ---
+  if(!ridotto){
+    var gen = document.getElementById('genitori'), tinte = ['#E2312B','#FFC531','#22A06B','#FF8FA3','#2A6ED0'];
+    for(var i=0;i<6;i++){
+      var p = document.createElement('span'); p.className = 'palloncino'; p.setAttribute('aria-hidden','true');
+      p.style.left = (8 + i*16) + '%'; p.style.background = tinte[i%tinte.length];
+      p.style.animationDuration = (14 + i*3) + 's'; p.style.animationDelay = (-i*4) + 's';
+      gen.appendChild(p);
+    }
+    gen.querySelector('.wrap').style.position = 'relative'; gen.querySelector('.wrap').style.zIndex = 2;
+  }
+
+  // --- Modulo prenotazione ---
+  var form = document.getElementById('modulo'), dataIn = document.getElementById('data');
+  var oggi = new Date(); oggi.setHours(0,0,0,0);
+  function iso(d){ return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+  dataIn.min = iso(oggi);
+  // proposta di default: il prossimo sabato
+  var domani = new Date(oggi); domani.setDate(domani.getDate() + (((6 - oggi.getDay()) + 7) % 7 || 7));
+  dataIn.value = iso(domani);
+
+  var festaExtra = document.getElementById('festaExtra');
+  form.querySelectorAll('input[name="tipo"]').forEach(function(r){
+    r.addEventListener('change', function(){ if(r.checked) festaExtra.hidden = r.value !== 'Compleanno'; });
+  });
+
+  function errore(id, msg){
+    var e = document.getElementById('e-'+id); if(e) e.textContent = msg || '';
+    var c = e && e.closest('.campo'); if(c) c.classList.toggle('ko', !!msg);
+    return !msg;
+  }
+  function valida(){
+    var ok = true, f = form;
+    var d = f.data.value ? new Date(f.data.value+'T00:00:00') : null;
+    if(!d) ok = errore('data','Scegli una data.') && ok;
+    else if(d < oggi) ok = errore('data','La data è già passata.') && ok;
+    else errore('data');
+    ok = errore('fascia', f.fascia.value ? '' : 'Scegli una fascia oraria.') && ok;
+    var n = +f.bambini.value;
+    ok = errore('bambini', n >= 1 ? '' : 'Indica quanti bambini inviti.') && ok;
+    ok = errore('nome', f.nome.value.trim().length > 2 ? '' : 'Scrivi nome e cognome.') && ok;
+    var tel = f.tel.value.replace(/[\s.\-+]/g,'');
+    ok = errore('tel', /^\d{9,13}$/.test(tel) ? '' : 'Inserisci un numero di cellulare valido.') && ok;
+    ok = errore('email', /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(f.email.value.trim()) ? '' : 'Controlla l\'indirizzo email.') && ok;
+    var pv = document.getElementById('e-privacy'); pv.textContent = f.privacy.checked ? '' : 'Serve il consenso per gestire la prenotazione.';
+    ok = f.privacy.checked && ok;
+    return ok;
+  }
+
+  form.addEventListener('submit', function(ev){
+    ev.preventDefault();
+    if(!valida()){ var primo = form.querySelector('.ko input, .ko select'); if(primo) primo.focus(); return; }
+    var f = form, codice = 'CRL-' + Math.random().toString(36).slice(2,6).toUpperCase();
+    var d = new Date(f.data.value+'T00:00:00');
+    var dati = {
+      codice: codice, tipo: f.tipo.value,
+      data: d.toLocaleDateString('it-IT',{weekday:'long',day:'numeric',month:'long',year:'numeric'}),
+      fascia: f.fascia.value, bambini: f.bambini.value, adulti: f.adulti.value || '0',
+      festeggiato: f.tipo.value==='Compleanno' ? f.festeggiato.value.trim() : '',
+      anni: f.tipo.value==='Compleanno' ? f.anni.value : '',
+      ora_extra: f.extra.checked ? 'Sì' : 'No',
+      nome: f.nome.value.trim(), telefono: f.tel.value.trim(), email: f.email.value.trim(), note: f.note.value.trim()
+    };
+    if(FORM_ENDPOINT){
+      fetch(FORM_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(dati)}).catch(function(){});
+    }
+    document.getElementById('codice').textContent = codice;
+    var rows = [['Occasione',dati.tipo],['Data',dati.data],['Fascia',dati.fascia + (f.extra.checked?' + 1 ora extra':'')],['Invitati',dati.bambini+' bambini, '+dati.adulti+' adulti']];
+    if(dati.festeggiato) rows.push(['Festeggiato',dati.festeggiato + (dati.anni?' · '+dati.anni+' anni':'')]);
+    rows.push(['Genitore',dati.nome],['Contatto',dati.telefono+' · '+dati.email]);
+    var rp = document.getElementById('riepilogo'); rp.innerHTML = '';
+    rows.forEach(function(r){ var p = document.createElement('div'); var b = document.createElement('b'); b.textContent = r[0]; p.appendChild(b); p.appendChild(document.createTextNode(r[1])); rp.appendChild(p); });
+    document.getElementById('campi').hidden = true; document.getElementById('esito').hidden = false;
+    burstFisso(form.getBoundingClientRect());
+    form.scrollIntoView({behavior: ridotto?'auto':'smooth', block:'start'});
+  });
+
+  document.getElementById('nuova').addEventListener('click', function(){
+    form.reset(); dataIn.value = iso(domani); festaExtra.hidden = false;
+    document.getElementById('campi').hidden = false; document.getElementById('esito').hidden = true;
+  });
+})();
+</script>
+</body>
+</html>
