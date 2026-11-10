@@ -11,7 +11,9 @@
  */
 
 // ====== DA COMPILARE ======
-var EMAIL_STAFF = "prenotazioni@circolandia.it";   // inoltrato da OVH alla tua casella personale
+var EMAIL_STAFF = "info@circolandia.it";     // dove arrivano gli avvisi (inoltrato alla tua Gmail)
+var EMAIL_MITTENTE = "info@circolandia.it";  // da quale indirizzo parte il riepilogo al cliente:
+                                             // deve essere configurato in Gmail come "Invia messaggio come"
 var NOME_SALA = "Circolandia";
 var URL_VOLANTINO = "https://circolandia.it/volantino-circolandia.pdf";
 // ==========================
@@ -127,5 +129,29 @@ function confermaCliente(d) {
       opzioni.attachments = [pdf.getBlob().setName("Volantino-" + NOME_SALA + ".pdf")];
     }
   } catch (err) { /* se il volantino non è raggiungibile l'email parte lo stesso, con il link */ }
-  MailApp.sendEmail(opzioni);
+  inviaDaAlias(opzioni);
+}
+
+// Invia dall'indirizzo @circolandia.it se è configurato in Gmail come "Invia messaggio come",
+// altrimenti dall'indirizzo Gmail dell'account (con nome "Circolandia" e risposta a EMAIL_STAFF).
+function inviaDaAlias(o) {
+  var alias = [];
+  try { alias = GmailApp.getAliases(); } catch (err) {}
+  if (EMAIL_MITTENTE && alias.indexOf(EMAIL_MITTENTE) !== -1) {
+    GmailApp.sendEmail(o.to, o.subject, o.body, {
+      from: EMAIL_MITTENTE, name: o.name, replyTo: o.replyTo,
+      htmlBody: o.htmlBody, attachments: o.attachments
+    });
+  } else {
+    MailApp.sendEmail(o);
+  }
+}
+
+// Da eseguire una volta dall'editor (menu Esegui) per controllare la configurazione.
+function verificaConfigurazione() {
+  var alias = GmailApp.getAliases();
+  Logger.log("Alias disponibili in Gmail: " + (alias.length ? alias.join(", ") : "nessuno"));
+  Logger.log(alias.indexOf(EMAIL_MITTENTE) !== -1
+    ? "OK: i riepiloghi ai clienti partiranno da " + EMAIL_MITTENTE
+    : "Attenzione: " + EMAIL_MITTENTE + " non è tra gli alias di Gmail, i riepiloghi partiranno dall'indirizzo Gmail");
 }
