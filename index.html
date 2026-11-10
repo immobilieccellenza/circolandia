@@ -163,6 +163,29 @@ form{background:#fff;border:3px solid var(--inchiostro);border-radius:24px;paddi
 .avviso{background:var(--sabbia);border:2px dashed var(--giallo);border-radius:14px;padding:14px 16px;display:grid;gap:4px}
 .avviso strong{font-family:var(--f-display);font-weight:400;font-size:1.25rem;color:var(--blu-notte)}
 .info-data{font-size:.85rem;color:var(--verde);font-weight:700}
+.lbl{font-weight:800;font-size:.92rem}
+.cal{border:2px solid #E3D4BD;border-radius:16px;padding:12px;background:var(--carta);display:grid;gap:8px}
+.cal-testa{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.cal-testa strong{font-family:var(--f-display);font-weight:400;font-size:1.3rem;color:var(--blu-notte);text-transform:capitalize}
+.cal-nav{width:40px;height:40px;border-radius:12px;border:2px solid #E3D4BD;background:#fff;color:var(--inchiostro);font-size:1.4rem;line-height:1;cursor:pointer;font-family:var(--f-body);font-weight:800}
+.cal-nav:hover:not(:disabled){border-color:var(--blu);color:var(--blu)}
+.cal-nav:disabled{opacity:.35;cursor:default}
+.cal-sett,.cal-giorni{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}
+.cal-sett span{text-align:center;font-size:.75rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--tenue)}
+.cal-g{position:relative;aspect-ratio:1;max-height:48px;width:100%;border:none;border-radius:10px;background:#fff;color:var(--inchiostro);font:800 .98rem var(--f-body);font-variant-numeric:tabular-nums;cursor:pointer;display:grid;place-items:center;box-shadow:inset 0 0 0 1.5px #EFE3CF}
+.cal-g:hover:not(:disabled){box-shadow:inset 0 0 0 2px var(--blu)}
+.cal-g.parz{background:#FFF1D6;box-shadow:inset 0 0 0 1.5px #F5D58A}
+.cal-g.parz::after{content:"";position:absolute;bottom:5px;left:50%;width:6px;height:6px;margin-left:-3px;border-radius:50%;background:#E0A21A}
+.cal-g.pieno{background:#FBE3E1;color:var(--rosso-scuro);text-decoration:line-through;box-shadow:none;cursor:not-allowed}
+.cal-g.fuori{background:transparent;color:#C9BBC4;box-shadow:none;cursor:default}
+.cal-g.vuoto{visibility:hidden}
+.cal-g.oggi{box-shadow:inset 0 0 0 2px var(--inchiostro)}
+.cal-g[aria-pressed="true"]{background:var(--blu);color:#fff;box-shadow:0 3px 0 var(--blu-notte)}
+.cal-g[aria-pressed="true"]::after{background:#fff}
+.cal-legenda{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.8rem;color:var(--tenue);font-weight:700;align-items:center}
+.cal-legenda i{display:inline-block;width:12px;height:12px;border-radius:4px;margin-right:5px;vertical-align:-1px}
+.l-lib{background:#fff;box-shadow:inset 0 0 0 1.5px #E3D4BD}.l-parz{background:#FFF1D6;box-shadow:inset 0 0 0 1.5px #F5D58A}.l-pieno{background:#FBE3E1}
+.cal-stato{margin-left:auto;font-style:italic}
 .info-data.pieno{color:var(--rosso-scuro)}
 .check a,.copy a,footer a{color:inherit}
 .esito{text-align:center;display:grid;gap:12px;justify-items:center;padding:20px 6px}
@@ -419,9 +442,26 @@ footer .da{background:rgba(255,197,49,.15);color:var(--giallo);border-radius:6px
           <input type="radio" name="tipo" id="t-altro" value="Altra occasione"><label for="t-altro"><span aria-hidden="true">🎉</span>Altra occasione</label>
         </fieldset>
 
+        <div class="campo">
+          <span class="lbl" id="l-data">Data della festa</span>
+          <input type="date" id="data" name="data" required hidden>
+          <div class="cal" role="group" aria-labelledby="l-data">
+            <div class="cal-testa">
+              <button type="button" class="cal-nav" id="calPrec" aria-label="Mese precedente">‹</button>
+              <strong id="calMese" aria-live="polite"></strong>
+              <button type="button" class="cal-nav" id="calSucc" aria-label="Mese successivo">›</button>
+            </div>
+            <div class="cal-sett" aria-hidden="true"><span>lun</span><span>mar</span><span>mer</span><span>gio</span><span>ven</span><span>sab</span><span>dom</span></div>
+            <div class="cal-giorni" id="calGiorni"></div>
+            <div class="cal-legenda">
+              <span><i class="l-lib"></i>Libero</span><span><i class="l-parz"></i>In parte prenotato</span><span><i class="l-pieno"></i>Al completo</span>
+              <span class="cal-stato" id="calStato"></span>
+            </div>
+          </div>
+          <span class="info-data" id="i-data"></span><span class="err" id="e-data"></span>
+        </div>
         <div class="riga">
-          <div class="campo"><label for="data">Data</label><input type="date" id="data" name="data" required><span class="info-data" id="i-data"></span><span class="err" id="e-data"></span></div>
-          <div class="campo"><label for="fascia">Fascia oraria</label>
+          <div class="campo" style="grid-column:1/-1"><label for="fascia">Fascia oraria</label>
             <select id="fascia" name="fascia" required>
               <option value="">Scegli…</option>
               <option value="Mattina 9:30–12:30" data-slot="mattina">Mattina 9:30–12:30</option>
@@ -610,7 +650,19 @@ footer .da{background:rgba(255,197,49,.15);color:var(--giallo);border-radius:6px
   dataIn.min = iso(primo); dataIn.max = iso(ultimo);
 
   // date occupate: { "2026-11-21": ["pomeriggio"], "2026-12-25": "tutto" }
-  var OCC = CFG.DATE_OCCUPATE || {};
+  var OCC = {};
+  function unisci(base, extra){
+    var out = {};
+    [base || {}, extra || {}].forEach(function(src){
+      Object.keys(src).forEach(function(g){
+        var v = src[g], lista = v === 'tutto' ? ['mattina','pomeriggio','sera'] : [].concat(v);
+        out[g] = (out[g] || []).concat(lista.map(function(x){ return String(x).toLowerCase().trim(); }))
+          .filter(function(x, i, a){ return a.indexOf(x) === i; });
+      });
+    });
+    return out;
+  }
+  OCC = unisci(CFG.DATE_OCCUPATE);
   function occupate(isoData){
     var v = OCC[isoData];
     if(!v) return [];
@@ -636,8 +688,63 @@ footer .da{background:rgba(255,197,49,.15);color:var(--giallo);border-radius:6px
   for(var k=0; k<26 && occupate(iso(proposta)).length === 3; k++) proposta.setDate(proposta.getDate() + 7);
   var domani = proposta;
   dataIn.value = iso(domani);
-  dataIn.addEventListener('change', function(){ aggiornaFasce(); errore('data'); });
+  dataIn.addEventListener('change', function(){ aggiornaFasce(); errore('data'); disegnaCal(); });
   aggiornaFasce();
+
+  // --- Calendario disponibilità ---
+  var calGiorni = document.getElementById('calGiorni'), calMese = document.getElementById('calMese'),
+      calPrec = document.getElementById('calPrec'), calSucc = document.getElementById('calSucc'), calStato = document.getElementById('calStato');
+  var meseVisto = new Date(domani.getFullYear(), domani.getMonth(), 1), dataToccata = false;
+  var nomiGiorno = ['domenica','lunedì','martedì','mercoledì','giovedì','venerdì','sabato'];
+  function disegnaCal(){
+    var y = meseVisto.getFullYear(), m = meseVisto.getMonth();
+    calMese.textContent = meseVisto.toLocaleDateString('it-IT', {month:'long', year:'numeric'});
+    calPrec.disabled = new Date(y, m, 1) <= new Date(primo.getFullYear(), primo.getMonth(), 1);
+    calSucc.disabled = new Date(y, m + 1, 1) > ultimo;
+    calGiorni.innerHTML = '';
+    var vuoti = (new Date(y, m, 1).getDay() + 6) % 7, giorni = new Date(y, m + 1, 0).getDate();
+    for(var v = 0; v < vuoti; v++){ var sp = document.createElement('span'); sp.className = 'cal-g vuoto'; calGiorni.appendChild(sp); }
+    for(var g = 1; g <= giorni; g++){
+      var dt = new Date(y, m, g), id = iso(dt), b = document.createElement('button');
+      var occ = occupate(id).length, fuori = id < dataIn.min || id > dataIn.max;
+      b.type = 'button'; b.textContent = g; b.dataset.giorno = id;
+      b.className = 'cal-g' + (fuori ? ' fuori' : occ >= 3 ? ' pieno' : occ ? ' parz' : '') + (id === iso(oggi) ? ' oggi' : '');
+      b.disabled = fuori || occ >= 3;
+      b.setAttribute('aria-pressed', id === dataIn.value ? 'true' : 'false');
+      b.setAttribute('aria-label', nomiGiorno[dt.getDay()] + ' ' + g + ' ' + calMese.textContent.split(' ')[0] + ', ' +
+        (fuori ? 'non prenotabile' : occ >= 3 ? 'al completo' : occ ? (3 - occ) + (3 - occ === 1 ? ' fascia libera' : ' fasce libere') : 'libero'));
+      b.title = b.getAttribute('aria-label');
+      calGiorni.appendChild(b);
+    }
+  }
+  calGiorni.addEventListener('click', function(ev){
+    var b = ev.target.closest('.cal-g'); if(!b || b.disabled || !b.dataset.giorno) return;
+    dataToccata = true; dataIn.value = b.dataset.giorno;
+    dataIn.dispatchEvent(new Event('change'));
+    var foc = calGiorni.querySelector('[data-giorno="' + dataIn.value + '"]'); if(foc) foc.focus();
+  });
+  calPrec.addEventListener('click', function(){ meseVisto.setMonth(meseVisto.getMonth() - 1); disegnaCal(); });
+  calSucc.addEventListener('click', function(){ meseVisto.setMonth(meseVisto.getMonth() + 1); disegnaCal(); });
+  disegnaCal();
+
+  function primaDataLibera(){
+    var p = new Date(primo); p.setDate(p.getDate() + ((6 - p.getDay() + 7) % 7));
+    for(var k = 0; k < 52 && occupate(iso(p)).length >= 3; k++) p.setDate(p.getDate() + 7);
+    return p;
+  }
+  function applicaOccupate(remote){
+    OCC = unisci(CFG.DATE_OCCUPATE, remote);
+    if(!dataToccata){ domani = primaDataLibera(); dataIn.value = iso(domani); meseVisto = new Date(domani.getFullYear(), domani.getMonth(), 1); }
+    aggiornaFasce(); disegnaCal();
+  }
+  // disponibilità aggiornata dal Foglio delle prenotazioni
+  if(FORM_ENDPOINT){
+    calStato.textContent = 'Aggiorno le disponibilità…';
+    fetch(FORM_ENDPOINT, {method:'GET'})
+      .then(function(r){ return r.json(); })
+      .then(function(j){ applicaOccupate(j && j.occupate); calStato.textContent = ''; })
+      .catch(function(){ calStato.textContent = ''; });
+  }
 
   // modulo non ancora collegato: niente finte conferme
   if(!FORM_ENDPOINT){
@@ -679,7 +786,7 @@ footer .da{background:rgba(255,197,49,.15);color:var(--giallo);border-radius:6px
 
   form.addEventListener('submit', function(ev){
     ev.preventDefault();
-    if(!valida()){ var primo = form.querySelector('.ko input, .ko select'); if(primo) primo.focus(); return; }
+    if(!valida()){ var errato = form.querySelector('.ko .cal-g:not(:disabled), .ko input:not([hidden]), .ko select'); if(errato) errato.focus(); return; }
     var f = form, codice = 'CRL-' + Math.random().toString(36).slice(2,6).toUpperCase();
     var d = new Date(f.data.value+'T00:00:00');
     var dati = {
@@ -712,13 +819,21 @@ footer .da{background:rgba(255,197,49,.15);color:var(--giallo);border-radius:6px
     btn.disabled = true; btn.textContent = 'Invio in corso…';
     fetch(FORM_ENDPOINT,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(dati)})
       .then(function(r){ return r.json(); })
-      .then(function(j){ if(!j || !j.ok) throw new Error('rifiutata'); mostraEsito(true); })
+      .then(function(j){
+        if(j && j.occupato){
+          applicaOccupate(j.occupate);
+          errore('fascia', 'Questa fascia è appena stata prenotata da un\'altra famiglia: scegline un\'altra.');
+          selFascia.focus(); return;
+        }
+        if(!j || !j.ok) throw new Error('rifiutata');
+        mostraEsito(true);
+      })
       .catch(function(){ errInvio.hidden = false; })
       .then(function(){ btn.disabled = false; btn.textContent = 'Invia la richiesta'; });
   });
 
   document.getElementById('nuova').addEventListener('click', function(){
-    form.reset(); dataIn.value = iso(domani); festaExtra.hidden = false; aggiornaFasce();
+    form.reset(); dataToccata = false; dataIn.value = iso(domani); festaExtra.hidden = false; aggiornaFasce(); disegnaCal();
     document.getElementById('campi').hidden = false; document.getElementById('esito').hidden = true;
   });
 })();
