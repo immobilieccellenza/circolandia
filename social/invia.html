@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="it"><head><meta charset="utf-8"><meta name="robots" content="noindex"><title>Circolandia – invio immagini</title></head>
+<body style="font-family:system-ui,sans-serif;padding:24px">
+<p id="s">Preparo le immagini…</p>
+<script>
+// Pagina di servizio: passa le immagini dei social alla finestra che l'ha aperta (Facebook/Instagram),
+// così possono essere caricate senza passare dalla finestra di scelta dei file.
+(async function () {
+  var s = document.getElementById('s');
+  var nomi = (new URLSearchParams(location.search).get('f') || '').split(',').filter(function (n) { return /^[a-z0-9-]+\.jpg$/.test(n); });
+  if (!window.opener) { s.textContent = 'Apri questa pagina dalla scheda di Facebook o Instagram.'; return; }
+  for (var i = 0; i < nomi.length; i++) {
+    var r = await fetch(nomi[i]);
+    var b = await r.blob();
+    window.opener.postMessage({ tipo: 'circolandia-img', nome: nomi[i], blob: b }, '*');
+  }
+  window.opener.postMessage({ tipo: 'circolandia-fine', n: nomi.length }, '*');
+  s.textContent = 'Fatto: ' + nomi.length + ' immagini inviate. Puoi chiudere questa finestra.';
+  setTimeout(function () { window.close(); }, 800);
+})();
+</script>
+</body></html>
