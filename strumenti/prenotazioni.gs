@@ -11,7 +11,7 @@
  */
 
 // ====== DA COMPILARE ======
-var EMAIL_STAFF = "";                 // dove ricevere le richieste, es. "info@circolandia.it"
+var EMAIL_STAFF = "prenotazioni@circolandia.it";   // inoltrato da OVH alla tua casella personale
 var NOME_SALA = "Circolandia";
 var URL_VOLANTINO = "https://circolandia.it/volantino-circolandia.pdf";
 // ==========================
